@@ -47,7 +47,7 @@ export default async function PasswordVaultPage() {
 										{error.message || JSON.stringify(error)}
 									</p>
 									<p className="mt-2 text-xs">
-										Controleer of de tabel &quot;password_vault&quot; bestaat. Voer de SQL script uit uit
+										Controleer of de tabel {`"`}password_vault{`"`} bestaat. Voer het SQL script uit uit
 										.sql/schema.sql om de tabel aan te maken.
 									</p>
 								</div>
