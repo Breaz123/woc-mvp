@@ -67,7 +67,7 @@ export function CookieBanner() {
 				</CardHeader>
 				<CardContent className="pt-0">
 					<p className="text-sm text-muted-foreground">
-						We gebruiken essentiële cookies voor authenticatie en beveiliging. Door op "Accepteren" te klikken,
+						We gebruiken essentiële cookies voor authenticatie en beveiliging. Door op &quot;Accepteren&quot; te klikken,
 						gaat u akkoord met ons{" "}
 						<Link href="/privacy" className="text-primary hover:underline">
 							cookiebeleid
