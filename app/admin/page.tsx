@@ -21,12 +21,18 @@ export default async function AdminPage() {
 	const signupsCount = signupsResult.count || 0;
 
 	// Count users per role
-	const usersByRole = (usersResult.data || []).reduce(
-		(acc, user) => {
-			acc[user.role] = (acc[user.role] || 0) + 1;
+	const usersByRole = (usersResult.data || []).reduce<Record<Role, number>>(
+		(acc, user: { role: Role | null }) => {
+			if (!user.role) return acc;
+			const role = user.role as Role;
+			acc[role] = (acc[role] ?? 0) + 1;
 			return acc;
 		},
-		{} as Record<Role, number>
+		{
+			[Role.Admin]: 0,
+			[Role.Kernlid]: 0,
+			[Role.Vrijwilliger]: 0,
+		}
 	);
 
 	return (
