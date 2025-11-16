@@ -1,0 +1,46 @@
+# Cursor Rules — WOC MVP
+project:
+  name: WOC MVP (ouderscomité)
+  goal: >
+    Bouw een minimal viable product voor events, shifts, inschrijvingen, nieuws, ledenlijst,
+    sponsors en statische pagina's met rollen (Admin, Kernlid, Vrijwilliger).
+    Stack: Next.js 14 (App Router, TS), Tailwind, shadcn/ui, Supabase (Auth+DB+RLS).
+    Alles in het Nederlands.
+
+stack:
+  framework: nextjs14
+  lang: typescript
+  ui: tailwind + shadcn/ui
+  db: supabase (Postgres) + RLS
+  auth: supabase magic link (email)
+  deploy: vercel
+
+roles:
+  - Admin: full beheer (events, shifts, nieuws, sponsors, pages, rollen wijzigen)
+  - Kernlid: beheer events/shifts/nieuws (geen deletes op sponsoren/pages, geen rolbeheer)
+  - Vrijwilliger: lezen; inschrijven/uitschrijven op shifts; eigen profiel beheren
+
+routes:
+  - "/": Home (eerstvolgend event + laatste 3 nieuws)
+  - "/events": lijst; "/events/[id]": detail + shifts
+  - "/shifts": alle shifts (groep per event); inschrijven/uitschrijven
+  - "/my-shifts": eigen inschrijvingen
+  - "/news": lijst + detail; admin/kern bewerken
+  - "/directory": ledenlijst; admin inline rol/team wijzigen
+  - "/sponsors": lijst; admin bewerken
+  - "/about" | "/privacy" | "/contact": uit pages table; admin inline edit
+  - "/admin": dashboard (stats + shortcuts); alleen Admin
+
+requirements:
+  - RLS is de ultieme guard (server checkt rol waar nodig).
+  - Unieke inschrijving: unique(shift_id, user_id).
+  - Vol = count(signups) >= max_slots; toon knoppen dynamisch.
+  - Alle labels NL.
+  - Zoveel mogelijk server components + server actions; revalidatePath na mutaties.
+  - Geen Prisma; gebruik Supabase client direct.
+
+quality:
+  - Heldere mapstructuur, nette componenten, types, zod validatie op API.
+  - Toegankelijke UI (buttons, disabled states, toasts).
+  - E2E "happy path": login → /shifts → inschrijven → my-shifts → uitschrijven.
+
