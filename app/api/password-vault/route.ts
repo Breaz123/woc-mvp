@@ -125,8 +125,9 @@ export async function POST(request: NextRequest) {
 		return NextResponse.json({ ...data, allowed_users: allowed_user_ids?.map((id) => ({ user_id: id })) || [] }, { status: 201 });
 	} catch (error: any) {
 		if (error instanceof z.ZodError) {
+			const firstIssue = error.issues[0];
 			return NextResponse.json(
-				{ error: error.errors[0].message },
+				{ error: firstIssue?.message || "Ongeldige gegevens" },
 				{ status: 400 }
 			);
 		}
@@ -210,8 +211,9 @@ export async function PUT(request: NextRequest) {
 		return NextResponse.json({ ...data, allowed_users: allowed_user_ids?.map((id) => ({ user_id: id })) || [] });
 	} catch (error: any) {
 		if (error instanceof z.ZodError) {
+			const firstIssue = error.issues[0];
 			return NextResponse.json(
-				{ error: error.errors[0].message },
+				{ error: firstIssue?.message || "Ongeldige gegevens" },
 				{ status: 400 }
 			);
 		}

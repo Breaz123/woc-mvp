@@ -36,7 +36,9 @@ export async function POST(request: NextRequest) {
 		return NextResponse.json({ success: true });
 	} catch (error) {
 		if (error instanceof z.ZodError) {
-			const errorMessages = error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ");
+			const errorMessages = error.issues
+				.map((e) => `${e.path.join(".")}: ${e.message}`)
+				.join(", ");
 			return NextResponse.json({ error: `Validatiefout: ${errorMessages}` }, { status: 400 });
 		}
 		if (error instanceof Error) {

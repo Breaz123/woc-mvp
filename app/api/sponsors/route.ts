@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
 		return NextResponse.json({ success: true });
 	} catch (error) {
 		if (error instanceof z.ZodError) {
-			return NextResponse.json({ error: error.errors }, { status: 400 });
+			return NextResponse.json({ error: error.issues }, { status: 400 });
 		}
 		return NextResponse.json(
 			{ error: "Server error" },

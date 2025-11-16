@@ -95,10 +95,10 @@ export async function POST(request: NextRequest) {
 		return NextResponse.json({ success: true });
 	} catch (error) {
 		if (error instanceof z.ZodError) {
-			const firstError = error.errors[0];
+			const firstIssue = error.issues[0];
 			return NextResponse.json(
 				{
-					error: firstError?.message || "Ongeldige gegevens",
+					error: firstIssue?.message || "Ongeldige gegevens",
 				},
 				{ status: 400 }
 			);
@@ -161,10 +161,10 @@ export async function DELETE(request: NextRequest) {
 		return NextResponse.json({ success: true });
 	} catch (error) {
 		if (error instanceof z.ZodError) {
-			const firstError = error.errors[0];
+			const firstIssue = error.issues[0];
 			return NextResponse.json(
 				{
-					error: firstError?.message || "Ongeldige gegevens",
+					error: firstIssue?.message || "Ongeldige gegevens",
 				},
 				{ status: 400 }
 			);
@@ -212,10 +212,10 @@ export async function GET(request: NextRequest) {
 		return NextResponse.json({ signups: signups || [] });
 	} catch (error) {
 		if (error instanceof z.ZodError) {
-			const firstError = error.errors[0];
+			const firstIssue = error.issues[0];
 			return NextResponse.json(
 				{
-					error: firstError?.message || "Ongeldige gegevens",
+					error: firstIssue?.message || "Ongeldige gegevens",
 				},
 				{ status: 400 }
 			);
