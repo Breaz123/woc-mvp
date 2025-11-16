@@ -66,13 +66,18 @@ export default async function ShiftsPage() {
 			</h1>
 			{Object.keys(shiftsByEvent).length > 0 ? (
 				<div className="space-y-10">
-					{Object.entries(shiftsByEvent).map(([eventId, { event, shifts }]) => (
-						<div key={eventId} className="space-y-6">
-							{event && (
-								<h2 className="text-2xl font-semibold text-foreground">{event.title}</h2>
-							)}
-							<StaggerContainer className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-								{shifts.map((shift) => {
+					{Object.entries(shiftsByEvent).map(([eventId, value]) => {
+						const { event, shifts } = value as {
+							event: Shift["event"];
+							shifts: Shift[];
+						};
+						return (
+							<div key={eventId} className="space-y-6">
+								{event && (
+									<h2 className="text-2xl font-semibold text-foreground">{event.title}</h2>
+								)}
+								<StaggerContainer className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+									{shifts.map((shift) => {
 									const shiftSignups = signupsByShift[shift.id] || [];
 									const count = shiftSignups.length;
 									const currentUserSignupId = session?.user.id
@@ -92,9 +97,10 @@ export default async function ShiftsPage() {
 										/>
 									);
 								})}
-							</StaggerContainer>
-						</div>
-					))}
+								</StaggerContainer>
+							</div>
+						);
+					})}
 				</div>
 			) : (
 				<p className="text-muted-foreground text-lg">Geen shifts gevonden</p>

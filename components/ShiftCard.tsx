@@ -372,7 +372,7 @@ export function ShiftCard({
 												)}
 												{signup.user?.team && (
 													<p className="text-xs text-muted-foreground">
-														Team: {signup.user.team}
+														Team: {signup.user.team.name}
 													</p>
 												)}
 											</div>

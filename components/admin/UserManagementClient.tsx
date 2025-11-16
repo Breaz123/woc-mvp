@@ -19,10 +19,16 @@ export function UserManagementClient() {
 	const router = useRouter();
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState<{
+		email: string;
+		password: string;
+		role: Role;
+		name: string;
+		team_id: string;
+	}>({
 		email: "",
 		password: "",
-		role: "Vrijwilliger" as Role,
+		role: Role.Vrijwilliger,
 		name: "",
 		team_id: "",
 	});
@@ -85,7 +91,7 @@ export function UserManagementClient() {
 			setFormData({
 				email: "",
 				password: "",
-				role: "Vrijwilliger",
+				role: Role.Vrijwilliger,
 				name: "",
 				team_id: "",
 			});

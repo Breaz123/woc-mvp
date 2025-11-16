@@ -2,9 +2,9 @@
 // Using optimized easing curves for buttery smooth motion
 
 // Smooth easing curves (cubic bezier)
-const easeOut = [0.16, 1, 0.3, 1]; // Custom ease-out for smooth deceleration
-const easeInOut = [0.4, 0, 0.2, 1]; // Material Design ease
-const easeSpring = [0.34, 1.56, 0.64, 1]; // Spring-like for bouncy feel
+const easeOut = [0.16, 1, 0.3, 1] as const; // Custom ease-out for smooth deceleration
+const easeInOut = [0.4, 0, 0.2, 1] as const; // Material Design ease
+const easeSpring = [0.34, 1.56, 0.64, 1] as const; // Spring-like for bouncy feel
 
 export const fadeIn = {
   initial: { opacity: 0 },
@@ -98,9 +98,9 @@ export const hoverLift = {
 export const cardHover = {
   y: -6,
   transition: {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 300,
     damping: 25,
   },
-};
+} as const;
 
